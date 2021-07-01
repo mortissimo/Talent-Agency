@@ -5,21 +5,21 @@ class TalentController{
         Talent.findAll()
         .then(data =>{
             res.render('talent.ejs', {
-                data
+                data,
+                req
             })
         })
     }
-    // static talent_add_Get(req, res){
-    //     res.render('talent_add.ejs', {
-    //     })
-    // }
-    // static talent_add_Post(req, res){
-    //     const {name, age, gender, talent} = req.body;
-    //     Talent.create({name, age, gender, talent})
-    //     .then(() =>{
-    //         res.redirect('/talents')
-    //     })
-    // }
+    static viewSchedule(req, res){
+        const talent_id = req.session.talent_id
+        Talent.findByPk(talent_id,{include:{model:Show}})
+        .then(data =>{
+            res.render('talent_schedule.ejs',{
+                data,
+                req
+            })
+        })  
+    }
 }
 
 module.exports = TalentController

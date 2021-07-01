@@ -4,12 +4,11 @@ const talent = require('./talent_routes');
 const show = require('./show_routes');
 
 router.get('/home', (req, res) =>{
-    res.render('home.ejs',{});
+    res.render('home.ejs',{req});
 })
 router.get('/', (req, res) =>{
-    res.render('home.ejs',{});
+    res.render('home.ejs',{req});
 })
-
 
 router.get('/login', MainController.login_Get);
 router.post('/login', MainController.login_Post);

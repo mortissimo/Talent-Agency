@@ -23,5 +23,8 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'User',
   });
+  User.addHook('beforeCreate', (instance, option)=>{
+    instance.role = 'Actor'
+  })
   return User;
 };

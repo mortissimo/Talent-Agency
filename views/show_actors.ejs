@@ -1,28 +1,23 @@
 <%- include('./layout/header.ejs', {doc_title:"Talent"}) %>
 <%- include('./layout/nav.ejs') %>
 <div class='container'>
-    <h1 class='mt-5'>Talent</h1>
-    <table class='table'>
+    <h1 class='mt-5'><%= data.name %></h1>
+    <p><%=data.schedule %></p>
+    <table class='table mt-3'>
         <tr class='bg-info'>
             <th>No</th>
             <th>Name</th>
             <th>Age</th>
             <th>Gender</th>
             <th>Talent</th>
-            <% if(req.session.role === 'Admin') { %>
-            <th>Action</th>
-            <% } %>
         </tr>
-        <% data.forEach((data, index) =>{ %>
+        <% data.Talents.forEach((data, index) =>{ %>
             <tr>
                 <td><%= index+1 %></td>
                 <td><%= data.name %></td>
                 <td><%= data.age %></td>
                 <td><%= data.gender %></td>
                 <td><%= data.talent %></td>
-                <% if(req.session.role === 'Admin') { %>
-                <td><a class='btn btn-danger' href="/talents/delete/<%= data.id %>">Delete</a></td>
-                <% } %>
             </tr>
         <%}) %>
         

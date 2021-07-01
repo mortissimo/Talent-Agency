@@ -11,16 +11,32 @@
             </li>
             <li class="nav-item">
               <a class="nav-link text-white" href="/shows">Show</a>
-            </li>  
+            </li> 
+            
           </ul>    
         </div>
         <ul class="nav navbar-nav navbar-right">  
+            <% if(req.session.isLogin) { %>
+               
+                 <% if(req.session.isLogin) {%> 
+                    <li class="nav-item">
+                        <a class="nav-link text-white h5" style="padding-right:50px" href="/talents/schedule">Your Schedule</a>
+                    </li>
+                    <% } %>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" >Hi, <%= req.session.talent_name %></a>
+                     </li> 
+                 <li class="nav-item">
+                    <a href ="/logout" class="nav-link text-white">Logout</a>
+                 </li> 
+            <% } else {%>      
             <li class="nav-item">
                  <a class="nav-link text-white " href="/register">Register</a>
-              </li>  
-              <li class="nav-item">
+            </li>  
+            <li class="nav-item">
                  <a class="nav-link text-white " href="/login">Login</a>
-              </li> 
+            </li> 
+              <% } %>
           </ul>
     </div>
 </nav>

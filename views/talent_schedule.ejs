@@ -1,0 +1,22 @@
+<%- include('./layout/header.ejs', {doc_title:"Talent"}) %>
+<%- include('./layout/nav.ejs') %>
+<div class='container'>
+    <h1>Your Schedule</h1>
+    <table class='table'>
+        <tr class='bg-info'>
+            <th>No</th>
+            <th>Name</th>
+            <th>Schedule</th>
+            <th>Action</th>
+        </tr>
+        <% data.Shows.forEach((data, index) =>{ %>
+            <tr>
+                <td><%= index+1 %></td>
+                <td><%= data.name %></td>
+                <td><%= data.schedule %></td>
+                <td><a class='btn btn-danger' href="/talents/delete/<%= data.id %>">Cancel</a></td>
+            </tr>
+        <%}) %>   
+    </table>
+</div>
+<%- include('./layout/footer.ejs') %>
