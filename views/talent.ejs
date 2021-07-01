@@ -1,7 +1,7 @@
 <%- include('./layout/header.ejs', {doc_title:"Talent"}) %>
 <%- include('./layout/nav.ejs') %>
 <div class='container'>
-    <h1 class='mt-5'>DATA</h1>
+    <h1 class='mt-5'>Talent</h1>
     <table class='table'>
         <tr class='bg-info'>
             <th>No</th>
@@ -11,14 +11,17 @@
             <th>Talent</th>
             <th>Action</th>
         </tr>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
+        <% data.forEach((data, index) =>{ %>
+            <tr>
+                <td><%= index+1 %></td>
+                <td><%= data.name %></td>
+                <td><%= data.age %></td>
+                <td><%= data.gender %></td>
+                <td><%= data.talent %></td>
+                <td><a class='btn btn-danger' href="/talents/delete/<%= data.id %>">Delete</a></td>
+            </tr>
+        <%}) %>
+        
     </table>
 </div>
 <%- include('./layout/footer.ejs') %>
