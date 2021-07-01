@@ -17,6 +17,6 @@ router.get('/logout', MainController.logout);
 router.get('/register', MainController.register_Get);
 router.post('/register', MainController.register_Post);
 router.use('/talents', talent);
-router.use('/shows/', show);
+router.use('/shows', show);
 
 module.exports = router;
