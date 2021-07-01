@@ -17,10 +17,9 @@
         </div>
         <ul class="nav navbar-nav navbar-right">  
             <% if(req.session.isLogin) { %>
-               
-                 <% if(req.session.isLogin) {%> 
+                 <% if(req.session.isLogin && req.session.user_role !== 'Admin') {%> 
                     <li class="nav-item">
-                        <a class="nav-link text-white h5" style="padding-right:50px" href="/talents/schedule">Your Schedule</a>
+                        <a class="nav-link text-white" style="padding-right:50px" href="/talents/schedule">My Schedule</a>
                     </li>
                     <% } %>
                     <li class="nav-item">

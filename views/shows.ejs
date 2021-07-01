@@ -5,7 +5,11 @@
     <% if(err) { %>
         <p class='mt-3' style='color:red;'><%= err %></p>
     <% } %>
-    <table class='table'>
+    <% if(req.session.user_role ==='Admin'){ %>
+        <a href="/shows/add" class='btn btn-success'>Add Show</a>
+    <% } %>
+    <a href=""></a>
+    <table class='table mt-1'>
         <tr class='bg-info'>
             <th>No</th>
             <th>Name</th>
@@ -19,10 +23,17 @@
                 <td><%= data.name %></td>
                 <td><%= data.schedule %></td>
                 <td><%= data.requirement %></td>
+                <% if(req.session.user_role === 'Admin') { %>
+                <td>
+                        <a class='btn btn-warning' href="/shows/edit/<%= data.id %>">Edit</a>
+                        <a class='btn btn-danger' href="/shows/delete/<%= data.id %>">Delete</a>
+                </td>
+                <% }else{ %>
                 <td>
                         <a class='btn btn-primary' href="/shows/join/<%= data.id %>">Join</a>
                         <a class='btn btn-primary' href="/shows/<%= data.id %>">View Talents</a>
                 </td>
+                <% } %>
             </tr>
         <%}) %>   
     </table>

@@ -1,8 +1,8 @@
-const {Show, Talent} = require("../models/index")
+const {Show, Talent, User} = require("../models/index")
 
 class TalentController{
     static getAll(req, res){
-        Talent.findAll()
+        Talent.findAll({include:{model:User}})
         .then(data =>{
             res.render('talent.ejs', {
                 data,
@@ -19,6 +19,13 @@ class TalentController{
                 req
             })
         })  
+    }
+    static delete(req, res){
+        const id = req.params.id;
+        Talent.destroy({where:{id}})
+        .then(() =>{
+            res.redirect('/talents')
+        })
     }
 }
 

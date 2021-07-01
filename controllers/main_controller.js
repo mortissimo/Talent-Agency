@@ -1,4 +1,5 @@
 const {User, Talent}= require("../models/index");
+let bcrypt = require('bcryptjs');
 
 class MainController{
     static register_Get(req, res){
@@ -6,8 +7,10 @@ class MainController{
             req
         });
     }
-    static register_Post(req, res){
-        const {username, password, email, name, age, gender, talent} = req.body;
+    static register_Post(req, res){ 
+        let {username, password, email, name, age, gender, talent} = req.body;
+        let salt = bcrypt.genSaltSync(8);
+        password = bcrypt.hashSync(password, salt);
         User.create({username, password, email})
         .then(data =>{
             return Talent.create({name, age, gender, talent, user_id: data.id})
@@ -28,10 +31,8 @@ class MainController{
     static login_Post(req, res){
         const {username, password} = req.body;
         User.findOne({where:{username}, include:{model:Talent}})
-        .then(data =>{
-            console.log(data.password, password);
-            if(data.password === password){
-                console.log(data.Talent.name);
+        .then(data =>{     
+            if(bcrypt.compareSync(password, data.password)){
                 req.session.isLogin = true;
                 req.session.user_id = data.id;
                 req.session.talent_id = data.Talent.id;

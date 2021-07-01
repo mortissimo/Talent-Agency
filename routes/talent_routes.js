@@ -7,10 +7,10 @@ const myLogger = function(req, res ,next){
     if(req.session.isLogin){
         next();
     }else{
-        res.redirect('/login?=You need to login to view your schedule')
+        res.redirect('/login?err=You need to login to view your schedule')
     }
 }
-
+router.get('/delete/:id', TalentController.delete)
 router.get('/', TalentController.getAll);
 router.get('/schedule',myLogger, TalentController.viewSchedule);
 

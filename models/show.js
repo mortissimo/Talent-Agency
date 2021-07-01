@@ -13,6 +13,9 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Show.belongsToMany(models.Talent, {through:models.TalentShow, foreignKey: "show_id"});
     }
+    getSchedule(){
+      return this.schedule.toLocaleString();
+    }
   };
   Show.init({
     name: DataTypes.STRING,
