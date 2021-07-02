@@ -5,21 +5,24 @@
 <body style='background-image: url(https://wallpapercave.com/wp/wp3716563.png);'>
 <div class='container'>
     <h2 class='d-flex justify-content-center mt-1 mb-3' style='color:#2d3436'>Talents</h2>
-    <table  class='table table-bordered;' >
+    <table  class='table table-bordered; table-striped shadow-lg' >
         <tr style='background-color:#a29bfe'>
             <th>No</th>
             <th>Name</th>
             <th>Age</th>
             <th>Gender</th>
             <th>Talent</th>
+            <% if(req.session.user_role === 'Admin') { %> 
             <th>Action</th>
+        <% } %>
         </tr>
         <% data.forEach((data, index) =>{ %>
-            <tr>
+            <tr >
                 <td><%= index+1 %></td>
                 <td><%= data.name %></td>
                 <td><%= data.age %></td>
                 <td><%= data.gender %></td>
+                <td><%= data.talent %></td>
                 <% if(req.session.user_role === 'Admin') { %> 
                 <td><a class='btn btn-danger' href="/talents/delete/<%= data.id %>">Ban</a></td>
                 <% } %>
