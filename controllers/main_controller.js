@@ -3,8 +3,10 @@ let bcrypt = require('bcryptjs');
 
 class MainController{
     static register_Get(req, res){
+        const {err} = req.query
         res.render('register_user.ejs',{
-            req
+            req,
+            err
         });
     }
     static register_Post(req, res){ 
