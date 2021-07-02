@@ -25,7 +25,6 @@ module.exports = {
       name : "Admin",
       age : 22,
       gender: "Male",
-      talent: "Dancer",
       createdAt : new Date(),
       updatedAt : new Date(),
       user_id : 3
