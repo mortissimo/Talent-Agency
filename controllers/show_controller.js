@@ -54,6 +54,7 @@ class ShowController{
             }    
         })
         .then(() =>{
+            require('dotenv').config()
             let mailOptions = {
                 from : 'agencyoftalents999@gmail.com',
                 to: `${talent.User.email}`,
