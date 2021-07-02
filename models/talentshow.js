@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
   };
   TalentShow.init({
     show_id: DataTypes.INTEGER,
-    actor_id: DataTypes.INTEGER
+    talent_id: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'TalentShow',
