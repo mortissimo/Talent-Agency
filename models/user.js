@@ -11,16 +11,41 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasOne(models.Talent, {foreignKey:'user_id'});
     }
   };
   User.init({
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    email: DataTypes.STRING,
+    username: {
+      type : DataTypes.STRING,
+      validate:{
+        notEmpty:{
+          msg: 'Username is required'
+        }
+      }
+    },
+    password: {
+      type : DataTypes.STRING,
+      validate:{
+        notEmpty:{
+          msg: "Password is required"
+        }
+      }
+    },
+    email: {
+      type :DataTypes.STRING,
+      validate:{
+        notEmpty:{
+          msg: 'Email is required'
+        },
+      }
+    },
     role: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'User',
   });
+  User.addHook('beforeCreate', (instance, option)=>{
+    instance.role = 'Actor'
+  })
   return User;
 };

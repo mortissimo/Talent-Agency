@@ -12,6 +12,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Talent.belongsToMany(models.Show, {through:models.TalentShow, foreignKey: "talent_id"});
+      Talent.belongsTo(models.User, {foreignKey:'user_id'});
     }
   };
   Talent.init({
@@ -23,5 +24,6 @@ module.exports = (sequelize, DataTypes) => {
     sequelize,
     modelName: 'Talent',
   });
+  
   return Talent;
 };

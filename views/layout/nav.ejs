@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
+    <div class='container'>
+        <a class="navbar-brand" href="">Talent Agency</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/talents">Talent</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-white" href="/shows">Show</a>
+            </li> 
+            
+          </ul>    
+        </div>
+        <ul class="nav navbar-nav navbar-right">  
+            <% if(req.session.isLogin) { %>
+                 <% if(req.session.isLogin && req.session.user_role !== 'Admin') {%> 
+                    <li class="nav-item">
+                        <a class="nav-link text-white" style="padding-right:50px" href="/talents/schedule">My Schedule</a>
+                    </li>
+                    <% } %>
+                    <li class="nav-item">
+                        <a class="nav-link text-white" >Hi, <%= req.session.talent_name %></a>
+                     </li> 
+                 <li class="nav-item">
+                    <a href ="/logout" class="nav-link text-white">Logout</a>
+                 </li> 
+            <% } else {%>      
+            <li class="nav-item">
+                 <a class="nav-link text-white " href="/register">Register</a>
+            </li>  
+            <li class="nav-item">
+                 <a class="nav-link text-white " href="/login">Login</a>
+            </li> 
+              <% } %>
+          </ul>
+    </div>
+</nav>
