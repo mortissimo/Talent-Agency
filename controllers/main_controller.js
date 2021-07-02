@@ -18,13 +18,19 @@ class MainController{
         .then(() =>{
             res.redirect('/login');
         })
-        .catch(err=>{
-            console.log(err)
-            res.send(err);
-            if(err.name === "SequelizeValidationError"){
-                
+        .catch(err =>{
+            console.log(err);
+            if(err.name === 'SequelizeValidationError'){
+                let data = err.errors.map(data =>{
+                    return data.message;
+                })
+                res.send(data);
+            }else if(err.name === "SequelizeUniqueConstraintError"){
+                res.redirect('/register?err=Username or Email has Already Exists')
+            }else{
+                res.send(err);
             }
-        });
+        })
     }
     static login_Get(req, res){
         const {err} = req.query;
