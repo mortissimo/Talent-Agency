@@ -18,6 +18,13 @@ class MainController{
         .then(() =>{
             res.redirect('/login');
         })
+        .catch(err=>{
+            console.log(err)
+            res.send(err);
+            if(err.name === "SequelizeValidationError"){
+                
+            }
+        });
     }
     static login_Get(req, res){
         const {err} = req.query;
