@@ -3,8 +3,10 @@ let bcrypt = require('bcryptjs');
 
 class MainController{
     static register_Get(req, res){
+        const {err} = req.query
         res.render('register_user.ejs',{
-            req
+            req,
+            err
         });
     }
     static register_Post(req, res){ 
@@ -17,6 +19,19 @@ class MainController{
         })
         .then(() =>{
             res.redirect('/login');
+        })
+        .catch(err =>{
+            console.log(err);
+            if(err.name === 'SequelizeValidationError'){
+                let data = err.errors.map(data =>{
+                    return data.message;
+                })
+                res.send(data);
+            }else if(err.name === "SequelizeUniqueConstraintError"){
+                res.redirect('/register?err=Username or Email has Already Exists')
+            }else{
+                res.send(err);
+            }
         })
     }
     static login_Get(req, res){
@@ -47,11 +62,11 @@ class MainController{
         .catch(err =>{
             res.redirect(`/login?err=Username and Password does not match`);
         })
-        
+
     }
     static logout(req, res){
         req.session.destroy();
-        
+
         res.redirect('/login');
     }
 }

@@ -1,4 +1,12 @@
-const {Show, Talent, TalentShow} = require("../models/index");
+const {Show, Talent, TalentShow, User} = require("../models/index");
+const nodemailer = require('nodemailer')
+let transporter = nodemailer.createTransport({
+    service:"gmail",
+    auth: {
+        user: 'agencyoftalents999@gmail.com',
+        pass: 'hacktiv8'
+    }
+})
 
 class ShowController{
     static getAll(req, res){
@@ -31,12 +39,14 @@ class ShowController{
         const talent_id = req.session.talent_id
         console.log(show_id, talent_id);
         let show = null;
+        let talent = null;
         Show.findByPk(show_id)
         .then(data =>{
             show = data;
-            return Talent.findByPk(talent_id)
+            return Talent.findByPk(talent_id,{include:{model:User}})
         })
-        .then(talent =>{
+        .then(data =>{
+            talent = data;
             if(talent.talent === show.requirement){
                 return TalentShow.create({show_id, talent_id})
             }else{
@@ -44,6 +54,19 @@ class ShowController{
             }    
         })
         .then(() =>{
+            let mailOptions = {
+                from : 'agencyoftalents999@gmail.com',
+                to: `${talent.User.email}`,
+                subject: 'INVITATION',
+                text: `Welcome, You are invited to ${show.name}, we will be waiting you at ${show.schedule} `
+            }
+            transporter.sendMail(mailOptions, function(err, data){
+                if (err){
+                    console.log (err)
+                }else{
+                    console.log ('Sent!')
+                }
+            })
             res.redirect(`/shows/${show_id}`);
         })
         .catch(err =>{
@@ -90,4 +113,4 @@ class ShowController{
     }
 }
 
-module.exports = ShowController;
+module.exports = ShowController; 

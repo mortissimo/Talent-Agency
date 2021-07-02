@@ -1,9 +1,10 @@
 <%- include('./layout/header.ejs', {doc_title:"Talent"}) %>
 <%- include('./layout/nav.ejs') %>
+<body style='background-image: url(https://wallpapercave.com/wp/wp3716563.png);'>
 <div class='container'>
-    <h1>Your Schedule</h1>
-    <table class='table'>
-        <tr class='bg-info'>
+    <h2 class='d-flex justify-content-center mt-1 mb-3' style='color:#2d3436'>Talents</h2>
+    <table  class='table table-bordered;' >
+        <tr style='background-color:#a29bfe'>
             <th>No</th>
             <th>Name</th>
             <th>Schedule</th>
@@ -19,4 +20,6 @@
         <%}) %>   
     </table>
 </div>
+</body>
+<br>
 <%- include('./layout/footer.ejs') %>

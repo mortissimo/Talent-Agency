@@ -1,17 +1,19 @@
 <%- include('./layout/header.ejs', {doc_title:"Talent"}) %>
 <%- include('./layout/nav.ejs') %>
+<body style='background-image: url(https://wallpapercave.com/wp/wp3716563.png);'>
 <div class='container'>
     <h1 class='mt-5'><%= data.name %></h1>
-    <p><%=data.schedule %></p>
-    <table class='table mt-3'>
-        <tr class='bg-info'>
+        <p><%=data.schedule %></p>
+    <h2 class='d-flex justify-content-center mt-1 mb-3' style='color:#2d3436'>Talents</h2>
+    <table  class='table table-bordered;' >
+        <tr style='background-color:#a29bfe'>
             <th>No</th>
             <th>Name</th>
             <th>Age</th>
             <th>Gender</th>
             <th>Talent</th>
         </tr>
-        <% data.Talents.forEach((data, index) =>{ %>
+         <% data.Talents.forEach((data, index) =>{ %>
             <tr>
                 <td><%= index+1 %></td>
                 <td><%= data.name %></td>
@@ -19,8 +21,9 @@
                 <td><%= data.gender %></td>
                 <td><%= data.talent %></td>
             </tr>
-        <%}) %>
-        
+        <%}) %> 
     </table>
 </div>
+</body>
+<br>
 <%- include('./layout/footer.ejs') %>
